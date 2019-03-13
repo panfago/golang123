@@ -37,7 +37,7 @@ func SiteInfo(c *gin.Context) {
 	siteConfig["logoURL"] = "/images/logo.png"
 	siteConfig["bdStatsID"] = ""
 	siteConfig["luosimaoSiteKey"] = ""
-	if err := model.DB.Where("key_name = \"site_config\"").Find(&keyvalueconfig).Error; err != nil {
+	if err := model.DB.Where("key_name = 'site_config'").Find(&keyvalueconfig).Error; err != nil {
 		fmt.Println(err.Error())
 	}
 	if err := json.Unmarshal([]byte(keyvalueconfig.Value), &siteConfig); err != nil {
@@ -55,7 +55,7 @@ func SiteInfo(c *gin.Context) {
 	baiduAdConfig["ad20_3A"] = ""
 	baiduAdConfig["allowBaiduAd"] = false
 
-	if err := model.DB.Where("key_name = \"baidu_ad_config\"").Find(&baiduAdKeyValue).Error; err != nil {
+	if err := model.DB.Where("key_name = 'baidu_ad_config'").Find(&baiduAdKeyValue).Error; err != nil {
 		fmt.Println(err.Error())
 	}
 	if err := json.Unmarshal([]byte(baiduAdKeyValue.Value), &baiduAdConfig); err != nil {

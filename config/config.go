@@ -33,7 +33,7 @@ func initJSON() {
 	}
 }
 
-type dBConfig struct {
+type mySqlDBConfig struct {
 	Dialect      string
 	Database     string
 	User         string
@@ -46,14 +46,36 @@ type dBConfig struct {
 	MaxOpenConns int
 }
 
+type postgresDBConfig struct {
+	Dialect      string
+	Database     string
+	User         string
+	Password     string
+	Host         string
+	Port         int
+	Charset      string
+	SSLMode      string
+	ConnInfo     string
+	MaxIdleConns int
+	MaxOpenConns int
+}
+
+var PostgresDBConfig postgresDBConfig
+
 // DBConfig 数据库相关配置
-var DBConfig dBConfig
+var DBConfig mySqlDBConfig
 
 func initDB() {
-	utils.SetStructByJSON(&DBConfig, jsonData["database"].(map[string]interface{}))
+	utils.SetStructByJSON(&DBConfig, jsonData["database_mysql"].(map[string]interface{}))
+	utils.SetStructByJSON(&PostgresDBConfig, jsonData["database_postgres"].(map[string]interface{}))
 	url := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
 		DBConfig.User, DBConfig.Password, DBConfig.Host, DBConfig.Port, DBConfig.Database, DBConfig.Charset)
+	connInfo := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s",
+		PostgresDBConfig.Host, PostgresDBConfig.Port, PostgresDBConfig.User, PostgresDBConfig.Database, PostgresDBConfig.Password, PostgresDBConfig.SSLMode)
 	DBConfig.URL = url
+	fmt.Println("url: " + url)
+	fmt.Println("connInfo: " + connInfo)
+	PostgresDBConfig.ConnInfo = connInfo
 }
 
 type redisConfig struct {

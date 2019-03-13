@@ -8,6 +8,7 @@ import (
 	"github.com/garyburd/redigo/redis"
 	"github.com/globalsign/mgo"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/shen100/golang123/config"
 )
 
@@ -21,7 +22,8 @@ var RedisPool *redis.Pool
 var MongoDB *mgo.Database
 
 func initDB() {
-	db, err := gorm.Open(config.DBConfig.Dialect, config.DBConfig.URL)
+	//db, err := gorm.Open(config.DBConfig.Dialect, config.DBConfig.URL) // Mysql
+	db, err := gorm.Open(config.PostgresDBConfig.Dialect, config.PostgresDBConfig.ConnInfo) // Postgres
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(-1)

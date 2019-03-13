@@ -10,6 +10,7 @@ npm-debug.log
 website/.nuxt
 website/config/index.js
 website/static/upload/img/*
+website/node_modules
 
 mobile/.nuxt
 mobile/config/index.js
