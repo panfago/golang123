@@ -45,6 +45,7 @@ function send (key, options) {
             url: url,
             headers: {}
         }
+
         if (config.useProxy && process.env.NODE_ENV === 'development') {
             axiosConfig.proxy = config.proxy
         }
@@ -66,6 +67,7 @@ function send (key, options) {
         }
 
         var startTime = new Date().getTime()
+        console.log('Request info: ' + axiosConfig)
         axios(axiosConfig)
             .then(function (response) {
                 if (typeof window === 'undefined') {

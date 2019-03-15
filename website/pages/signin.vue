@@ -1,8 +1,8 @@
 <template>
     <Row type="flex" align="middle" justify="center" class="golang-signin-container">
         <Col :xs="24" :lg="6" :md="14">
-            <a class="golang-signin-title" href="/">GOLANG123</a>
-            <p class="golang-signin-desc">和地鼠们分享你的知识、经验和见解</p>
+            <a class="golang-signin-title" href="/">再见，初恋！</a>
+            <p class="golang-signin-desc">和初恋分享你的知识、经验和见解</p>
         	<Form ref="formCustom" :model="formCustom" :rules="ruleCustom" class="signup-form">
         		<Form-item prop="username">
                     <i-input
@@ -111,6 +111,7 @@
                                 luosimaoRes: this.luosimaoRes
                             }
                         }).then(res => {
+                            console.log('Result-01:' + res)
                             this.loading = false
                             if (res.errNo === ErrorCode.SUCCESS) {
                                 window.location.href = this.redirectURL
@@ -126,6 +127,7 @@
                                 })
                             }
                         }).catch(err => {
+                            console.log('Error-01:' + err)
                             this.loading = false
                             this.$Message.error({
                                 duration: config.messageDuration,
@@ -133,7 +135,7 @@
                                 content: err.message || err.msg
                             })
                         })
-                    }
+                    } // if (valid)
                 })
             },
             handleKeyUp (e) {
