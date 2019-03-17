@@ -22,7 +22,7 @@ var RedisPool *redis.Pool
 var MongoDB *mgo.Database
 
 func initDB() {
-	//db, err := gorm.Open(config.DBConfig.Dialect, config.DBConfig.URL) // Mysql
+	//db, err := gorm.Open(config.MysqlDBConfig.Dialect, config.MysqlDBConfig.URL) // Mysql
 	db, err := gorm.Open(config.PostgresDBConfig.Dialect, config.PostgresDBConfig.ConnInfo) // Postgres
 	if err != nil {
 		fmt.Println(err.Error())
@@ -31,8 +31,8 @@ func initDB() {
 	if config.ServerConfig.Env == DevelopmentMode {
 		db.LogMode(true)
 	}
-	db.DB().SetMaxIdleConns(config.DBConfig.MaxIdleConns)
-	db.DB().SetMaxOpenConns(config.DBConfig.MaxOpenConns)
+	db.DB().SetMaxIdleConns(config.MysqlDBConfig.MaxIdleConns)
+	db.DB().SetMaxOpenConns(config.MysqlDBConfig.MaxOpenConns)
 	DB = db
 }
 

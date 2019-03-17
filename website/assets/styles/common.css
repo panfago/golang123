@@ -386,7 +386,8 @@ input[name="topSearch"]:hover, input[name="topSearch"]:focus {
 }
 
 .golang-key-word {
-	color: #80bd01;
+	/*color: #80bd01;*/
+	color: #FF3844;
 }
 
 .golang-score-item {
@@ -445,13 +446,17 @@ input[name="topSearch"]:hover, input[name="topSearch"]:focus {
 }
 
 .golang-user-publish .ivu-btn-primary {
-    background-color: #80bd01;
-    border-color: #80bd01;;
+    /*background-color: #80bd01;*/
+    background-color: #FF3844;
+    /*border-color: #80bd01;*/
+    border-color: #FF3844;
 }
 
 .golang-user-publish .ivu-btn-primary:hover {
-    background-color: #92cb1a;
-    border-color: #92cb1a;;
+    /*background-color: #92cb1a;*/
+    background-color: #FF3844;
+    /*border-color: #92cb1a;*/
+    border-color: #FF3844;
 }
 
 .golang123-editor {
@@ -784,7 +789,8 @@ input[name="topSearch"]:hover, input[name="topSearch"]:focus {
 }
 
 .common-body-nav a {
-	color: #80bd01;
+	/*color: #80bd01;*/
+	color: #FF3844;
 }
 
 .common-body-nav li {

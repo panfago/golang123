@@ -34,7 +34,8 @@ body {
 }
 
 .about-nav a {
-    color: #80bd01;
+    /*color: #80bd01;*/
+    color: #FF3844;
 }
 
 .about-nav span {

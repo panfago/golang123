@@ -14,25 +14,6 @@ import (
 
 var jsonData map[string]interface{}
 
-func initJSON() {
-	bytes, err := ioutil.ReadFile("./config.json")
-	if err != nil {
-		fmt.Println("ReadFile: ", err.Error())
-		os.Exit(-1)
-	}
-
-	configStr := string(bytes[:])
-	reg := regexp.MustCompile(`/\*.*\*/`)
-
-	configStr = reg.ReplaceAllString(configStr, "")
-	bytes = []byte(configStr)
-
-	if err := json.Unmarshal(bytes, &jsonData); err != nil {
-		fmt.Println("invalid config: ", err.Error())
-		os.Exit(-1)
-	}
-}
-
 type mySqlDBConfig struct {
 	Dialect      string
 	Database     string
@@ -60,22 +41,47 @@ type postgresDBConfig struct {
 	MaxOpenConns int
 }
 
+func initJSON() {
+	bytes, err := ioutil.ReadFile("./config.json")
+	if err != nil {
+		fmt.Println("ReadFile: ", err.Error())
+		os.Exit(-1)
+	}
+
+	configStr := string(bytes[:])
+	// comment style 1
+	reg := regexp.MustCompile(`/\*.*\*/`)
+	configStr = reg.ReplaceAllString(configStr, "")
+	bytes = []byte(configStr)
+
+	if err := json.Unmarshal(bytes, &jsonData); err != nil {
+		fmt.Println("invalid config: ", err.Error())
+		os.Exit(-1)
+	}
+}
+
 var PostgresDBConfig postgresDBConfig
 
-// DBConfig 数据库相关配置
-var DBConfig mySqlDBConfig
+// MysqlDBConfig 数据库相关配置
+var MysqlDBConfig mySqlDBConfig
 
-func initDB() {
-	utils.SetStructByJSON(&DBConfig, jsonData["database_mysql"].(map[string]interface{}))
-	utils.SetStructByJSON(&PostgresDBConfig, jsonData["database_postgres"].(map[string]interface{}))
-	url := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
-		DBConfig.User, DBConfig.Password, DBConfig.Host, DBConfig.Port, DBConfig.Database, DBConfig.Charset)
-	connInfo := fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s",
-		PostgresDBConfig.Host, PostgresDBConfig.Port, PostgresDBConfig.User, PostgresDBConfig.Database, PostgresDBConfig.Password, PostgresDBConfig.SSLMode)
-	DBConfig.URL = url
+func initDBMysql() {
+	var url = ""
+	utils.SetStructByJSON(&MysqlDBConfig, jsonData["database_mysql"].(map[string]interface{}))
+	url = fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True&loc=Local",
+		MysqlDBConfig.User, MysqlDBConfig.Password, MysqlDBConfig.Host, MysqlDBConfig.Port, MysqlDBConfig.Database, MysqlDBConfig.Charset)
+	MysqlDBConfig.URL = url
 	fmt.Println("url: " + url)
-	fmt.Println("connInfo: " + connInfo)
+
+}
+
+func initDBPostgres() {
+	var connInfo = ""
+	utils.SetStructByJSON(&PostgresDBConfig, jsonData["database_postgres"].(map[string]interface{}))
+	connInfo = fmt.Sprintf("host=%s port=%d user=%s dbname=%s password=%s sslmode=%s",
+		PostgresDBConfig.Host, PostgresDBConfig.Port, PostgresDBConfig.User, PostgresDBConfig.Database, PostgresDBConfig.Password, PostgresDBConfig.SSLMode)
 	PostgresDBConfig.ConnInfo = connInfo
+	fmt.Println("connInfo: " + connInfo)
 }
 
 type redisConfig struct {
@@ -183,7 +189,8 @@ func initStatsd() {
 
 func init() {
 	initJSON()
-	initDB()
+	//initDBMysql()
+	initDBPostgres()
 	initRedis()
 	initMongo()
 	initServer()

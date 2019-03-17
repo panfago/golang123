@@ -13,7 +13,8 @@ body {
 }
 
 .categoties-item {
-    color: #80bd01;
+    /*color: #80bd01;*/
+    color: #FF3844;
     padding: 5px 7px;
     margin-right: 10px;
     display: inline-block;
@@ -21,7 +22,8 @@ body {
 }
 
 .categoties-item:hover, .categoties-select {
-    background-color: #80bd01;
+    /*background-color: #80bd01;*/
+    background-color: #FF3844;
     text-decoration: none;
 }
 

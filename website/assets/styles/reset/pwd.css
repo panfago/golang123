@@ -18,7 +18,8 @@ body {
 .golang-forget-title {
 	height: 30px;
 	line-height: 30px;
-	background-color: #80bd01;
+	/*background-color: #80bd01;*/
+	background-color: #FF3844;
 	color: #fff;
 	font-size: 14px;
 	margin-top: 15px;

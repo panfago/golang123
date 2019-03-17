@@ -32,7 +32,8 @@ body {
 }
 
 .book-nav a {
-    color: #80bd01;
+    /*color: #80bd01;*/
+    color: #FF3844;
 }
 
 .book-nav-sep {

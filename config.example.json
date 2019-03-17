@@ -1,15 +1,38 @@
 {
-	"database": {
-		"Dialect"      : "mysql",
-		"Database"     : "golang123",
-		"User"	       : "",
-		"Password"     : "",
-		"Charset"      : "utf8mb4",  /*要支持emoji的话，填 utf8mb4 */
-		"Host"         : "127.0.0.1",/*数据库ip*/
-		"Port"         : 3306,       /*数据库端口*/
-		"MaxIdleConns" : 5,          /*空闲时最大的连接数*/
-		"MaxOpenConns" : 10          /*最大的连接数*/
-	},
+		"database_mysql": {
+			"Dialect": "mysql",
+			"Database": "golang123",
+			"User": "",
+			"Password": "",
+			"Charset": "utf8mb4",
+			/*要支持emoji的话，填 utf8mb4 */
+			"Host": "127.0.0.1",
+			/*数据库ip*/
+			"Port": 3306,
+			/*数据库端口*/
+			"MaxIdleConns": 5,
+			/*空闲时最大的连接数*/
+			"MaxOpenConns": 10
+			/*最大的连接数*/
+		},
+
+		"database_postgres": {
+			"Dialect": "postgres",
+			"Database": "wo.aicjh.com",
+			"User": "wo.aicjh.com",
+			"Password": "wo.aicjh.com",
+			"Charset": "utf8",
+			/*填 utf8 */
+			"Host": "127.0.0.1",
+			/*数据库ip*/
+			"Port": 5432,
+			/*数据库端口*/
+			"SSLMode": false,
+			"MaxIdleConns": 5,
+			/*空闲时最大的连接数*/
+			"MaxOpenConns": 10
+			/*最大的连接数*/
+		},
 	"redis": {
 		"Host"      : "127.0.0.1",/*redis所在机器的ip*/
 		"Port"      : 6379,       /*redis的端口*/	
@@ -21,14 +44,14 @@
 		"URL" : ""	
 	},
 	"statsd": {
-		"URL": "", /*statsd服务连接地址，如127.0.0.1:8125*/
+		"URL": "",   /*statsd服务连接地址，如127.0.0.1:8125*/
 		"Prefix": "" /*statsd客户端前缀，可留空*/
 	},
 	"go": {
 		"APIPoweredBy"        : "Golang123 API",/*后台go加的X-Powered-By*/
 		"SiteName"            : "Golang中文社区",      /*网站名称*/
-		"Host"                : "dev.golang123.com",  /*网站域名*/
-		"ImgHost"             : "dev.golang123.com",  /*图片服务器域名*/
+		"Host"                : "127.0.0.1",  /*网站域名*/
+		"ImgHost"             : "127.0.0.1",  /*图片服务器域名*/
 		"Env"                 : "development",        /*模式(开发，测试，产品)*/
 		"LogDir"              : "", /*日志文件所在的目录，如果不设的话，默认在项目目录下*/          
 		"APIPrefix"           : "/api", /*api服务请求前缀*/
