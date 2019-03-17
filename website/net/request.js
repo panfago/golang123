@@ -67,7 +67,6 @@ function send (key, options) {
         }
 
         var startTime = new Date().getTime()
-        console.log('Request info: ' + axiosConfig)
         axios(axiosConfig)
             .then(function (response) {
                 if (typeof window === 'undefined') {

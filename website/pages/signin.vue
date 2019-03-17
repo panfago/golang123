@@ -111,7 +111,6 @@
                                 luosimaoRes: this.luosimaoRes
                             }
                         }).then(res => {
-                            console.log('Result-01:' + res)
                             this.loading = false
                             if (res.errNo === ErrorCode.SUCCESS) {
                                 window.location.href = this.redirectURL
@@ -127,7 +126,6 @@
                                 })
                             }
                         }).catch(err => {
-                            console.log('Error-01:' + err)
                             this.loading = false
                             this.$Message.error({
                                 duration: config.messageDuration,
