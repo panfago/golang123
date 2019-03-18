@@ -88,6 +88,7 @@ type redisConfig struct {
 	Host      string
 	Port      int
 	Password  string
+	DBNumber  int
 	URL       string
 	MaxIdle   int
 	MaxActive int

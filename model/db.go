@@ -43,7 +43,7 @@ func initRedis() {
 		IdleTimeout: 240 * time.Second,
 		Wait:        true,
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", config.RedisConfig.URL, redis.DialPassword(config.RedisConfig.Password))
+			c, err := redis.Dial("tcp", config.RedisConfig.URL, redis.DialPassword(config.RedisConfig.Password), redis.DialDatabase(config.RedisConfig.DBNumber))
 			if err != nil {
 				return nil, err
 			}
